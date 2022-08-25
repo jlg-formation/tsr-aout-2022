@@ -13,3 +13,15 @@ export const getPositionFromAngle = (angle: number): Point => {
   const y = y0 + r0 * Math.sin(angle);
   return { x, y };
 };
+
+export const querySelector = (cssSelector: string) => {
+  const container = document.querySelector(cssSelector);
+  if (container === null) {
+    throw new Error(`Cannot find selector: ${cssSelector}`);
+  }
+  return container;
+};
+
+export const setAttributeNbr = (elt: Element, key: string, value: number) => {
+  return elt.setAttributeNS(null, key, value + "");
+};

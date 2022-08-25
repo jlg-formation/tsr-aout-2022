@@ -17,3 +17,8 @@ circle {
 g.samples circle {
   fill: black;
 }
+
+g.lines line {
+  stroke: black;
+  stroke-width: 0.02em;
+}

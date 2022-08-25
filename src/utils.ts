@@ -25,3 +25,15 @@ export const querySelector = (cssSelector: string) => {
 export const setAttributeNbr = (elt: Element, key: string, value: number) => {
   return elt.setAttributeNS(null, key, value + "");
 };
+
+const svgns = "http://www.w3.org/2000/svg";
+
+export const drawLine = (p1: Point, p2: Point) => {
+  const container = querySelector("svg g.lines");
+  const line = document.createElementNS(svgns, "line");
+  setAttributeNbr(line, "x1", p1.x);
+  setAttributeNbr(line, "y1", p1.y);
+  setAttributeNbr(line, "x2", p2.x);
+  setAttributeNbr(line, "y2", p2.y);
+  container.appendChild(line);
+};

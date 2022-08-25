@@ -1,5 +1,6 @@
 import { BoardConfig } from "./interfaces/BoardConfig.js";
 import {
+  drawLine,
   getAngleFromIndex,
   getPositionFromAngle,
   querySelector,
@@ -14,6 +15,7 @@ export class Board {
 
   draw() {
     this.drawCircles();
+    this.drawLines();
   }
 
   drawCircles() {
@@ -34,6 +36,24 @@ export class Board {
       setAttributeNbr(circle, "cy", y);
       setAttributeNbr(circle, "r", r);
       container.appendChild(circle);
+    }
+  }
+
+  drawLine(index: number) {
+    const angle1 = getAngleFromIndex(index, this.config.samples);
+    const angle2 = getAngleFromIndex(
+      this.config.multiplicationFactor * index,
+      this.config.samples
+    );
+    const p1 = getPositionFromAngle(angle1);
+    const p2 = getPositionFromAngle(angle2);
+
+    drawLine(p1, p2);
+  }
+
+  drawLines() {
+    for (let i = 0; i < this.config.samples; i++) {
+      this.drawLine(i);
     }
   }
 

@@ -1,6 +1,8 @@
+import { Point } from "./interfaces/Point";
+
 const samples = 10;
 
-const getAngleFromIndex = (index: number, samples) => {
+const getAngleFromIndex = (index: number, samples: number) => {
   return (index * 2 * Math.PI) / samples;
 };
 
@@ -9,7 +11,7 @@ const y0 = 50;
 const r0 = 45;
 const r = 1;
 
-const getPositionFromAngle = (angle) => {
+const getPositionFromAngle = (angle: number): Point => {
   const x = x0 + r0 * Math.cos(angle);
   const y = y0 + r0 * Math.sin(angle);
   return { x, y };

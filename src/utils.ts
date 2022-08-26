@@ -1,4 +1,4 @@
-import { Point } from "./interfaces/Point.js";
+import { Point } from "./interfaces/Point";
 
 export const getAngleFromIndex = (index: number, samples: number) => {
   return (index * 2 * Math.PI) / samples;

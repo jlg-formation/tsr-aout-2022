@@ -1,8 +1,8 @@
-import { Board } from "./Board.js";
+import { Board } from "./Board";
 
 const board = new Board();
 board.setConfig({
-  samples: 10,
-  multiplicationFactor: 2,
+  samples: 100,
+  multiplicationFactor: 5,
 });
 board.draw();

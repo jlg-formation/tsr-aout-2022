@@ -2,7 +2,9 @@
   "compilerOptions": {
     "target": "ES6",
     "outDir": "build",
-    "strict": true
+    "strict": true,
+    "module": "ES6",
+    "moduleResolution": "node"
   },
   "include": ["src"]
 }

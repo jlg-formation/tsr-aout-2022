@@ -1,11 +1,11 @@
-import { BoardConfig } from "./interfaces/BoardConfig.js";
+import { BoardConfig } from "./interfaces/BoardConfig";
 import {
   drawLine,
   getAngleFromIndex,
   getPositionFromAngle,
   querySelector,
   setAttributeNbr,
-} from "./utils.js";
+} from "./utils";
 
 export class Board {
   config: BoardConfig = {

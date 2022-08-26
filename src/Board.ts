@@ -1,4 +1,5 @@
 import { BoardConfig } from "./interfaces/BoardConfig";
+import { test51 } from "./test-decorator";
 import {
   drawLine,
   getAngleFromIndex,
@@ -7,6 +8,7 @@ import {
   setAttributeNbr,
 } from "./utils";
 
+@test51
 export class Board {
   config: BoardConfig = {
     samples: 10,

@@ -1,5 +1,6 @@
+import { lastValueFrom, timer } from "rxjs";
 import { BoardConfig } from "./interfaces/BoardConfig";
-import { querySelector, sleep } from "./utils";
+import { querySelector } from "./utils";
 
 const DELAY = 300;
 
@@ -49,7 +50,7 @@ export class Command {
       this.render();
       this.callback(this.config);
 
-      await sleep(DELAY);
+      await lastValueFrom(timer(DELAY));
     }
   }
 

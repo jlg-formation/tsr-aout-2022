@@ -37,3 +37,11 @@ export const drawLine = (p1: Point, p2: Point) => {
   setAttributeNbr(line, "y2", p2.y);
   container.appendChild(line);
 };
+
+export const sleep = (delay: number) => {
+  return new Promise<void>((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, delay);
+  });
+};

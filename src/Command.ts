@@ -1,5 +1,7 @@
 import { BoardConfig } from "./interfaces/BoardConfig";
-import { querySelector } from "./utils";
+import { querySelector, sleep } from "./utils";
+
+const DELAY = 300;
 
 export class Command {
   callback: (newConfig: BoardConfig) => void = () => {};
@@ -7,6 +9,7 @@ export class Command {
     samples: 10,
     multiplicationFactor: 2,
   };
+  isPlaying = false;
 
   constructor() {
     this.render();
@@ -26,6 +29,28 @@ export class Command {
         this.callback(this.config);
       });
     }
+
+    const btn = querySelector("div.command button.play");
+    btn.addEventListener("click", () => {
+      this.isPlaying = !this.isPlaying;
+      this.render();
+      if (this.isPlaying) {
+        this.play();
+      }
+    });
+  }
+
+  async play() {
+    while (this.isPlaying) {
+      this.config.multiplicationFactor++;
+      if (this.config.multiplicationFactor > 100) {
+        this.config.multiplicationFactor = 0;
+      }
+      this.render();
+      this.callback(this.config);
+
+      await sleep(DELAY);
+    }
   }
 
   render() {
@@ -40,6 +65,9 @@ export class Command {
       }
       slider.value = this.config[key] + "";
     }
+
+    const btn = querySelector("div.command button.play");
+    btn.innerHTML = this.isPlaying ? "Pause" : "Play";
   }
 
   setConfig(config: BoardConfig) {

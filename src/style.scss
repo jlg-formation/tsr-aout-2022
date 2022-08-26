@@ -1,7 +1,15 @@
 $width: 60em;
 
+@import "../node_modules/sanitize.css/sanitize.css";
+
 body {
   font-family: sans-serif;
+  padding: 0.5em;
+}
+
+h1 {
+  margin-top: 0;
 }
 
 @import "./scss/board.scss";
+@import "./scss/command.scss";

@@ -13,6 +13,13 @@ export class Board {
     multiplicationFactor: 2,
   };
 
+  clean() {
+    const lines = querySelector("svg g.lines");
+    lines.innerHTML = "";
+    const circles = querySelector("svg g.samples");
+    circles.innerHTML = "";
+  }
+
   draw() {
     this.drawCircles();
     this.drawLines();
@@ -55,6 +62,11 @@ export class Board {
     for (let i = 0; i < this.config.samples; i++) {
       this.drawLine(i);
     }
+  }
+
+  redraw() {
+    this.clean();
+    this.draw();
   }
 
   setConfig(config: BoardConfig) {

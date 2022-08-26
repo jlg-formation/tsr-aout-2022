@@ -16,5 +16,5 @@ const command = new Command();
 command.setConfig(config);
 command.subscribe((newConfig) => {
   board.setConfig(newConfig);
-  board.draw();
+  board.redraw();
 });

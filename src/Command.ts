@@ -2,6 +2,7 @@ import { BoardConfig } from "./interfaces/BoardConfig";
 import { querySelector } from "./utils";
 
 export class Command {
+  callback: (newConfig: BoardConfig) => void = () => {};
   config: BoardConfig = {
     samples: 10,
     multiplicationFactor: 2,
@@ -9,15 +10,22 @@ export class Command {
 
   constructor() {
     this.render();
+    this.init();
   }
 
-  setConfig(config: BoardConfig) {
-    this.config = config;
-    this.render();
-  }
-
-  subscribe(arg0: (newConfig: any) => void) {
-    throw new Error("Method not implemented.");
+  init() {
+    const keys: (keyof BoardConfig)[] = ["samples", "multiplicationFactor"];
+    for (const key of keys) {
+      const slider = querySelector(`.command label.${key} input`);
+      if (!(slider instanceof HTMLInputElement)) {
+        throw new Error("Cannot find an input");
+      }
+      slider.addEventListener("input", (event) => {
+        this.config[key] = +slider.value;
+        this.render();
+        this.callback(this.config);
+      });
+    }
   }
 
   render() {
@@ -32,5 +40,14 @@ export class Command {
       }
       slider.value = this.config[key] + "";
     }
+  }
+
+  setConfig(config: BoardConfig) {
+    this.config = config;
+    this.render();
+  }
+
+  subscribe(callback: (newConfig: BoardConfig) => void) {
+    this.callback = callback;
   }
 }

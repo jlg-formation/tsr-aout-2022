@@ -1,4 +1,4 @@
-import { lastValueFrom, timer } from "rxjs";
+import { interval, lastValueFrom, Subscription, timer } from "rxjs";
 import { BoardConfig } from "./interfaces/BoardConfig";
 import { querySelector } from "./utils";
 
@@ -11,6 +11,7 @@ export class Command {
     multiplicationFactor: 2,
   };
   isPlaying = false;
+  subscription: Subscription | undefined;
 
   constructor() {
     this.render();
@@ -41,8 +42,8 @@ export class Command {
     });
   }
 
-  async play() {
-    while (this.isPlaying) {
+  play() {
+    this.subscription = interval(DELAY).subscribe(() => {
       this.config.multiplicationFactor++;
       if (this.config.multiplicationFactor > 100) {
         this.config.multiplicationFactor = 0;
@@ -50,8 +51,10 @@ export class Command {
       this.render();
       this.callback(this.config);
 
-      await lastValueFrom(timer(DELAY));
-    }
+      if (this.isPlaying === false) {
+        this.subscription?.unsubscribe();
+      }
+    });
   }
 
   render() {

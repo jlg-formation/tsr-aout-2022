@@ -25,6 +25,12 @@ export class Command {
     for (const key of keys) {
       const elt = querySelector(`.command label.${key} span`);
       elt.innerHTML = this.config[key] + "";
+
+      const slider = querySelector(`.command label.${key} input`);
+      if (!(slider instanceof HTMLInputElement)) {
+        throw new Error("Cannot find an input");
+      }
+      slider.value = this.config[key] + "";
     }
   }
 }
